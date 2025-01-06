@@ -8,11 +8,13 @@ public class RingController : MonoBehaviour
     public Action OnRingCollected;
     public Action OnAllRingsCollected;
     private int _ringsCount;
+    private AudioSource _audioSource;
 
 
     private void Awake()
     {
         _ringsCount = transform.childCount;
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public void RingCollected()
@@ -21,6 +23,9 @@ public class RingController : MonoBehaviour
         _ringsCount--;
 
         if(_ringsCount == 0)
+        {
+            _audioSource.Play();
             OnAllRingsCollected?.Invoke();
+        }
     }
 }
