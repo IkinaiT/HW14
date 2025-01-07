@@ -26,7 +26,7 @@ public class HealthUpBehaviour : MonoBehaviour
             {
                 _playerStatus.AddHealth();
 
-                _audioSource.Play();
+                SoundManager.PlayMusic(_audioSource);
 
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
 

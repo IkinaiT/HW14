@@ -34,7 +34,7 @@ public class RingBehaviour : MonoBehaviour
 
                 _parrentMeshRenderer.material = _collectedMaterial;
 
-                _audioSource.Play();
+                SoundManager.PlayMusic(_audioSource);
 
                 _isCollected = true;
             }

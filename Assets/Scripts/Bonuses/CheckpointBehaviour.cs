@@ -32,7 +32,7 @@ public class CheckpointBehaviour : MonoBehaviour
             _collected.SetActive(true);
             _isCollected = true;
 
-            _audioSource.Play();
+            SoundManager.PlayMusic(_audioSource);
         }
     }
 }

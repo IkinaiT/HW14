@@ -8,6 +8,8 @@ public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField]
     private Transform _respawnPoint;
+    [SerializeField]
+    private GameObject _gameOverPanel;
 
     private PlayerStatus _playerStatus;
     private GameObject _player;
@@ -21,7 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void Dead()
     {
-        GetComponent<AudioSource>().Play();
+        SoundManager.PlayMusic(GetComponent<AudioSource>());
         _playerStatus.DecraseHealth();
         _player.SetActive(false);
         StartCoroutine(OnDeadCoroutine());
@@ -33,11 +35,14 @@ public class PlayerBehaviour : MonoBehaviour
 
         if (_playerStatus.GetHealth() < 0)
         {
-            SceneManager.LoadScene("Level1");
+            Instantiate(_gameOverPanel);
+        }
+        else
+        {
+            _player.transform.position = _respawnPoint.position;
+            _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            _player.SetActive(true);
         }
 
-        _player.transform.position = _respawnPoint.position;
-        _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        _player.SetActive(true);
     }
 }

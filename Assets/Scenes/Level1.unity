@@ -53727,6 +53727,10 @@ PrefabInstance:
       propertyPath: _respawnPoint
       value: 
       objectReference: {fileID: 304215522}
+    - target: {fileID: 6733598228285725568, guid: ee8851fffca037f42b08696a4facdc22, type: 3}
+      propertyPath: _gameOverPanel
+      value: 
+      objectReference: {fileID: 9214889821193810239, guid: 02dd3afa7fae444428c7ab75516fbc61, type: 3}
     - target: {fileID: 7638817857794872221, guid: ee8851fffca037f42b08696a4facdc22, type: 3}
       propertyPath: _respawnPoint
       value: 
