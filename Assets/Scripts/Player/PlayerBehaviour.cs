@@ -16,9 +16,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = _respawnPoint.position;
         _player = GetComponentsInChildren<Transform>().First(_ => _.name == "PlayerObject").gameObject;
         _playerStatus = _player.GetComponent<PlayerStatus>();
+
+        _player.transform.position = _respawnPoint.position;
     }
 
     public void Dead()
@@ -39,6 +40,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
         else
         {
+            _playerStatus.ConfirmLastSize();
             _player.transform.position = _respawnPoint.position;
             _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
             _player.SetActive(true);

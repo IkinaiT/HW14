@@ -27,6 +27,8 @@ public class CheckpointBehaviour : MonoBehaviour
     {
         if (!_isCollected && other.gameObject.tag == "Player")
         {
+            other.GetComponent<PlayerStatus>().SetLastSize();
+
             _respawnPoint.position = transform.position;
             _active.SetActive(false);
             _collected.SetActive(true);

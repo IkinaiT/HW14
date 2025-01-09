@@ -24,7 +24,7 @@ public class RingController : MonoBehaviour
 
         if(_ringsCount == 0)
         {
-            _audioSource.Play();
+            SoundManager.PlayMusic(_audioSource);
             OnAllRingsCollected?.Invoke();
         }
     }
