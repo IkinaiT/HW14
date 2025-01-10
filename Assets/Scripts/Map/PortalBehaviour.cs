@@ -7,7 +7,7 @@ public class PortalBehaviour : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject.CompareTag("Player"))
         {
             GameDataManager.ChangeData(SceneManager.GetActiveScene().buildIndex);
 

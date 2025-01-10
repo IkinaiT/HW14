@@ -458,6 +458,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _respawnPoint: {fileID: 0}
+  _active: {fileID: 3947248741505148950}
+  _collected: {fileID: 3874626644609188344}
 --- !u!65 &859332887591021270
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -652,6 +654,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 819cdf441487ee741aee0558b2946e0f, type: 3}
+--- !u!1 &3947248741505148950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 819cdf441487ee741aee0558b2946e0f, type: 3}
+  m_PrefabInstance: {fileID: 4181055695586104647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4435097294504063660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 819cdf441487ee741aee0558b2946e0f, type: 3}

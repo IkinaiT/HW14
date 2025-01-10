@@ -26,7 +26,7 @@ public class RingBehaviour : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!_isCollected && other.gameObject.tag == "Player")
+        if (!_isCollected && other.gameObject.CompareTag("Player"))
         {
             if (!_isBigRing && _playerStatus.GetSize() == PlayerSize.Small || _isBigRing)
             {

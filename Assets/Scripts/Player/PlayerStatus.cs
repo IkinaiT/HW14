@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
+    [SerializeField, Range(1, 3)]
+    private float _bigSizeScale = 1.5f;
+
     private int _health = 3;
     private PlayerSize _size;
     private PlayerSize _lastSize;
@@ -25,13 +28,13 @@ public class PlayerStatus : MonoBehaviour
     public void PumpUp()
     {
         _size = PlayerSize.Big;
-        transform.localScale = new(1.5f, 1.5f, 1.5f);
+        transform.localScale = Vector3.one * _bigSizeScale;
     }
 
     public void PumpDown()
     {
         _size = PlayerSize.Small;
-        transform.localScale = new(1f, 1f, 1f);
+        transform.localScale = Vector3.one;
     }
 
     public void SetLastSize() => _lastSize = _size;

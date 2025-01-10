@@ -33,7 +33,7 @@ public class SpikedBallBehavoiur : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             _playerBehaviour.Dead();
             _particleSystem.Play();

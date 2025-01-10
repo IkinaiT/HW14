@@ -18,19 +18,19 @@ public class MainMenuController : MonoBehaviour
     private GameObject _parametersPanel;
     
 
-    private async void Start()
+    private void Start()
     {
-        SaveData saveData = await GameDataManager.GetData();
+        SaveData saveData = GameDataManager.GetData();
 
         
 
-        if(saveData.ColpletedLevels > 0)
+        if(saveData.CompletedLevels > 0)
         {
             _continueButton.interactable = true;
         }
     }
 
-    public async void Continue() => SceneManager.LoadScene((await GameDataManager.GetData()).ColpletedLevels + 1);
+    public void Continue() => SceneManager.LoadScene(GameDataManager.GetData().CompletedLevels + 1);
 
     public void NewGame() => SceneManager.LoadScene(1);
 

@@ -6,6 +6,8 @@ public class PlayerCamera : MonoBehaviour
 {
     [SerializeField]
     private Transform _player;
+    [SerializeField, Range(0.1f, 3f)]
+    private float _cameraSpeed = 0.5f;
 
     private void Awake()
     {
@@ -16,6 +18,6 @@ public class PlayerCamera : MonoBehaviour
     {
         transform.LookAt(_player.position);
 
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(6.75f, _player.position.y, _player.position.z), 0.5f);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(6.75f, _player.position.y, _player.position.z), _cameraSpeed);
     }
 }

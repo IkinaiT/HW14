@@ -22,7 +22,7 @@ public class HealthUpBehaviour : MonoBehaviour
     {
         if (!_isCollected)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.CompareTag("Player"))
             {
                 _playerStatus.AddHealth();
 

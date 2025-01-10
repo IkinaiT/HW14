@@ -7,96 +7,97 @@ using UnityEngine;
 
 public class GameDataManager : MonoBehaviour 
 {
-    private static GameDataManager _instance;
-    private static SaveData _saveData;
-
-    public static GameDataManager Instance
-    {
-        get
-        {
-            if(_instance != null)
-                return _instance;
-
-            return new GameObject("(singleton) GameDataManager").AddComponent<GameDataManager>();
-        }
-    }
-
     private async void Awake()
     {
         await GetOrLoadData();
 
-        if (_instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        _instance = this;
         DontDestroyOnLoad(gameObject);
     }
 
-    public static async Task<SaveData> GetData()
+    public static SaveData GetData()
     {
-        if (_saveData == null)
-            await GetOrLoadData();
+        var saveData = GetSaveDataFromPlayerPrefs();
 
-        return _saveData;
+
+        return saveData;
     }
 
     public static void ChangeData(float soundLevel, bool soundState)
     {
-        _saveData.SoundLevel = soundLevel;
-        _saveData.IsSoundsOn = soundState;
+        var saveData = GetSaveDataFromPlayerPrefs();
 
-        Save();
+        saveData.SoundLevel = soundLevel;
+        saveData.IsSoundsOn = soundState;
+
+        Save(saveData);
+
+        SetPlayerPrefsFromSaveData(saveData);
     }
 
-    public static void ChangeData(int complitedLevel)
+    public static void ChangeData(int completedLevel)
     {
-        _saveData.ColpletedLevels = complitedLevel;
+        var saveData = GetSaveDataFromPlayerPrefs();
 
-        Save();
+        saveData.CompletedLevels = completedLevel;
+
+        Save(saveData);
     }
 
-    private static void Save()
+    private static void Save(SaveData saveData)
     {
         using (StreamWriter sw = new(Application.persistentDataPath + "/Save1.sv"))
         {
-            var temp = JsonUtility.ToJson(_saveData);
+            var temp = JsonUtility.ToJson(saveData);
 
             sw.WriteLine(temp);
         }
     }
+
     private static async Task GetOrLoadData()
     {
+        var saveData = new SaveData();
+
         if (File.Exists(Application.persistentDataPath + "/Save1.sv"))
         {
             using (StreamReader sr = new(Application.persistentDataPath + "/Save1.sv"))
             {
-                try
-                {
-                    var temp = await sr.ReadToEndAsync();
+                var temp = await sr.ReadToEndAsync();
 
-                    if (!string.IsNullOrEmpty(temp))
-                        _saveData = JsonUtility.FromJson<SaveData>(temp);
-                    else
-                        _saveData = new();
-                }
-                catch (Exception ex)
-                {
+                if (!string.IsNullOrEmpty(temp))
+                    saveData = JsonUtility.FromJson<SaveData>(temp);
 
-                }
+                PlayerPrefs.SetFloat(GlobalStringVars.SoundLevel, saveData.SoundLevel);
+                PlayerPrefs.SetInt(GlobalStringVars.CompletedLevels, saveData.CompletedLevels);
+                PlayerPrefs.SetString(GlobalStringVars.IsSoundsOn, saveData.IsSoundsOn.ToString());
             }
         }
         else
         {
-            _saveData = new();
-
             using (StreamWriter sw = new(Application.persistentDataPath + "/Save1.sv"))
             {
-                var temp = JsonUtility.ToJson(_saveData);
+                var temp = JsonUtility.ToJson(saveData);
 
                 sw.WriteLine(temp);
             }
         }
+
+        SetPlayerPrefsFromSaveData(saveData);
+    }
+
+    private static SaveData GetSaveDataFromPlayerPrefs()
+    {
+        return new SaveData
+        {
+            CompletedLevels = PlayerPrefs.GetInt(GlobalStringVars.CompletedLevels),
+            IsSoundsOn = PlayerPrefs.GetString(GlobalStringVars.IsSoundsOn).ToLower() == "true",
+            SoundLevel = PlayerPrefs.GetFloat(GlobalStringVars.SoundLevel)
+        };
+    }
+
+    private static void SetPlayerPrefsFromSaveData(SaveData saveData)
+    {
+        PlayerPrefs.SetFloat(GlobalStringVars.SoundLevel, saveData.SoundLevel);
+        PlayerPrefs.SetInt(GlobalStringVars.CompletedLevels, saveData.CompletedLevels);
+        PlayerPrefs.SetString(GlobalStringVars.IsSoundsOn, saveData.IsSoundsOn.ToString());
     }
 }

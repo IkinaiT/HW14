@@ -16,9 +16,9 @@ public class ParametersController : MonoBehaviour
     private float _volumeLevel;
     private bool _isOnSounds;
 
-    private async void Awake()
+    private void Awake()
     {
-        var saveData = await GameDataManager.GetData();
+        var saveData = GameDataManager.GetData();
 
         _volumeSlider.value = saveData.SoundLevel;
         _volumeToggle.isOn = saveData.IsSoundsOn;
@@ -40,9 +40,9 @@ public class ParametersController : MonoBehaviour
         BackToMenu();
     }
 
-    public async void Cancel()
+    public void Cancel()
     {
-        var saveData = await GameDataManager.GetData();
+        var saveData = GameDataManager.GetData();
 
         _volumeSlider.value = saveData.SoundLevel;
         _volumeToggle.isOn = saveData.IsSoundsOn;

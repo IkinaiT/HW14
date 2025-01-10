@@ -11,12 +11,12 @@ public class SelectLevelController : MonoBehaviour
 
     private Button[] _levelButtons;
 
-    private async void Awake()
+    private void Awake()
     {
         _levelButtons = transform.GetChild(0).GetComponentsInChildren<Button>();
-        var tempData = await GameDataManager.GetData();
+        var tempData = GameDataManager.GetData();
 
-        for (int i = 0; i <= tempData.ColpletedLevels && i < _levelButtons.Length - 1; i++)
+        for (int i = 0; i <= tempData.CompletedLevels && i < _levelButtons.Length - 1; i++)
         {
             _levelButtons[i].interactable = true;
         }

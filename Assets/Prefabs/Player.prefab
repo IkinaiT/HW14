@@ -255,6 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _respawnPoint: {fileID: 0}
   _gameOverPanel: {fileID: 9214889821193810239, guid: 02dd3afa7fae444428c7ab75516fbc61, type: 3}
+  _player: {fileID: 4111366519362712049}
 --- !u!82 &881034423927621825
 AudioSource:
   m_ObjectHideFlags: 0

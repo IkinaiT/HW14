@@ -7,17 +7,17 @@ public class CheckpointBehaviour : MonoBehaviour
 {
     [SerializeField]
     private Transform _respawnPoint;
-
+    [SerializeField]
     private GameObject _active;
+    [SerializeField]
     private GameObject _collected;
+
     private AudioSource _audioSource;
     private bool _isCollected = false;
 
 
     private void Awake()
     {
-        _active = GetComponentsInChildren<Transform>().First(_ => _.gameObject.name == "Active").gameObject;
-        _collected = GetComponentsInChildren<Transform>().First(_ => _.gameObject.name == "Collected").gameObject;
         _collected.SetActive(false);
 
         _audioSource = GetComponent<AudioSource>();
@@ -25,7 +25,7 @@ public class CheckpointBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isCollected && other.gameObject.tag == "Player")
+        if (!_isCollected && other.gameObject.CompareTag("Player"))
         {
             other.GetComponent<PlayerStatus>().SetLastSize();
 

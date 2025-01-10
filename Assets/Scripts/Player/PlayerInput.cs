@@ -10,18 +10,16 @@ public class PlayerInput : MonoBehaviour
     private bool _jump;
 
 
-
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        var horizontal = Input.GetAxis(GlobalStringVars.HORIZONTAL_AXIS);
+        var horizontal = Input.GetAxis(GlobalStringVars.HorizontalAxis);
 
-        _jump = Input.GetButton(GlobalStringVars.JUMP_BUTTON);
+        _jump = Input.GetButton(GlobalStringVars.JumpButton);
 
         _movement = new Vector3(0, 0, horizontal);
     }

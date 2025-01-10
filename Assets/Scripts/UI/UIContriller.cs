@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIContriller : MonoBehaviour, IDisposable
+public class UIContriller : MonoBehaviour
 {
     [SerializeField]
     private PlayerStatus _playerStatus;
@@ -67,10 +67,6 @@ public class UIContriller : MonoBehaviour, IDisposable
             rectTrans.SetParent(_ringsPanel.transform);
             rectTrans.localScale = Vector3.one;
             spr.SetActive(true);
-
-            //rectTrans.anchorMin = new(0, 0.5f);
-            //rectTrans.anchorMax = new(0, 0.5f);
-            //rectTrans.pivot = new(0.5f, 0.5f);
         }
 
         for(int i = 0; i < _health; i++)
@@ -111,7 +107,7 @@ public class UIContriller : MonoBehaviour, IDisposable
         SceneManager.LoadScene(0);
     }
 
-    public void Dispose()
+    private void OnDestroy()
     {
         _playerStatus.OnHealthChanged -= _ => _health = _;
         _ringController.OnRingCollected -= () => _ringsCount--;

@@ -10,29 +10,31 @@ public class PlayerBehaviour : MonoBehaviour
     private Transform _respawnPoint;
     [SerializeField]
     private GameObject _gameOverPanel;
+    [SerializeField]
+    private GameObject _playerObject;
+    [SerializeField, Range(1, 10)]
+    private float _respawnTime = 2;
 
     private PlayerStatus _playerStatus;
-    private GameObject _player;
 
     private void Awake()
     {
-        _player = GetComponentsInChildren<Transform>().First(_ => _.name == "PlayerObject").gameObject;
-        _playerStatus = _player.GetComponent<PlayerStatus>();
+        _playerStatus = _playerObject.GetComponent<PlayerStatus>();
 
-        _player.transform.position = _respawnPoint.position;
+        _playerObject.transform.position = _respawnPoint.position;
     }
 
     public void Dead()
     {
         SoundManager.PlayMusic(GetComponent<AudioSource>());
         _playerStatus.DecraseHealth();
-        _player.SetActive(false);
+        _playerObject.SetActive(false);
         StartCoroutine(OnDeadCoroutine());
     }
 
     private IEnumerator OnDeadCoroutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(_respawnTime);
 
         if (_playerStatus.GetHealth() < 0)
         {
@@ -41,9 +43,9 @@ public class PlayerBehaviour : MonoBehaviour
         else
         {
             _playerStatus.ConfirmLastSize();
-            _player.transform.position = _respawnPoint.position;
-            _player.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            _player.SetActive(true);
+            _playerObject.transform.position = _respawnPoint.position;
+            _playerObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            _playerObject.SetActive(true);
         }
 
     }

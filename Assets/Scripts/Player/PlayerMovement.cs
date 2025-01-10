@@ -29,13 +29,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Floor")
+        if (other.gameObject.CompareTag("Floor"))
             _canJump = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Floor")
+        if (other.gameObject.CompareTag("Floor"))
             _canJump = false;
     }
 

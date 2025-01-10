@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorBehaviour : MonoBehaviour, IDisposable
+public class DoorBehaviour : MonoBehaviour
 {
     [SerializeField]
     private RingController _ringController;
@@ -18,8 +18,6 @@ public class DoorBehaviour : MonoBehaviour, IDisposable
     {
         transform.position = new(transform.position.x, transform.position.y + 2.5f, transform.position.z);
     }
-    public void Dispose()
-    {
-        _ringController.OnAllRingsCollected -= OpenDoor;
-    }
+
+    private void OnDestroy() => _ringController.OnAllRingsCollected -= OpenDoor;
 }
