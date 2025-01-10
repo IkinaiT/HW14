@@ -206,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3edfbb70a8c39f24faeac8b6ab267296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bigSizeScale: 1.5
 --- !u!1 &5338873851122269966
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,7 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _respawnPoint: {fileID: 0}
   _gameOverPanel: {fileID: 9214889821193810239, guid: 02dd3afa7fae444428c7ab75516fbc61, type: 3}
-  _player: {fileID: 4111366519362712049}
+  _playerObject: {fileID: 4111366519362712049}
+  _respawnTime: 2
 --- !u!82 &881034423927621825
 AudioSource:
   m_ObjectHideFlags: 0
@@ -458,3 +460,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 713369639687936929}
+  _cameraSpeed: 0.5

@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SideScroller/Level3.unity
     guid: ee6288b284c7c9d47a64f4008940b83e
+  - enabled: 1
+    path: Assets/Scenes/SideScroller/Final.unity
+    guid: 3ee262b66920a1e4f8e0e6304de94dab
   m_configObjects: {}
